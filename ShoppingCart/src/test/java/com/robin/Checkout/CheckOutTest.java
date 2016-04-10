@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.robin.Offer.BuyOneGetOneFree;
 import com.robin.Offer.Offer;
+import com.robin.Offer.ThreeForPriceOfTwo;
 
 public class CheckOutTest {
 	
@@ -52,6 +53,17 @@ public class CheckOutTest {
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString());
     		offer.put("Apple",new BuyOneGetOneFree());
+    		checkOut.setOffer(offer);
+    		System.out.println("Total :£" + checkOut.CalTotal());
+    		System.out.println( "--------------------------------------------------------------------------");
+    }
+	
+	@Test
+	public void test3()
+    {
+    		System.out.println( "--------------------------------------------------------------------------");
+    		System.out.println("Transaction list:"+fruitTran.toString());
+    		offer.put("Orange",new ThreeForPriceOfTwo());
     		checkOut.setOffer(offer);
     		System.out.println("Total :£" + checkOut.CalTotal());
     		System.out.println( "--------------------------------------------------------------------------");
