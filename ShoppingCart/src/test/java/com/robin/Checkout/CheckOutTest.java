@@ -13,6 +13,8 @@ import com.robin.Offer.BuyOneGetOneFree;
 import com.robin.Offer.Offer;
 import com.robin.Offer.ThreeForPriceOfTwo;
 
+import static org.junit.Assert.*;
+
 public class CheckOutTest {
 	
 	Map<String,Fruit> fruitMaster=null;
@@ -29,6 +31,7 @@ public class CheckOutTest {
     	fruitMaster.put("Orange",new Fruit("Orange",0.25)); // put Orange details in the Fruit Master
     	System.out.println("Fruit Master");
     	System.out.println(fruitMaster.toString());
+    	System.out.println( "--------------------------------------------------------------------------");
     	checkOut.setStockFruit(fruitMaster); //set Fruit Master to Checkout Object
     	
     	fruitTran = new ArrayList<String>(
@@ -41,6 +44,7 @@ public class CheckOutTest {
 	@Test
 	public void test1()
     {
+			System.out.println( "Test without Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString()); //Print Fruit transaction list
     		System.out.println("Total :£" + checkOut.CalTotal()); //print the total value of the transaction list.
@@ -50,6 +54,7 @@ public class CheckOutTest {
 	@Test
 	public void test2()
     {
+			System.out.println( "Test with BuyOneGetOneFree Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString());
     		offer.put("Apple",new BuyOneGetOneFree());
@@ -61,6 +66,7 @@ public class CheckOutTest {
 	@Test
 	public void test3()
     {
+			System.out.println( "Test with ThreeForPriceOfTwo Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString());
     		offer.put("Orange",new ThreeForPriceOfTwo());
@@ -68,4 +74,15 @@ public class CheckOutTest {
     		System.out.println("Total :£" + checkOut.CalTotal());
     		System.out.println( "--------------------------------------------------------------------------");
     }
+	
+	@Test
+	public void test4()
+	{
+		System.out.println( "Test with no Transaction-- error condition");
+		System.out.println( "--------------------------------------------------------------------------");
+		fruitTran=null;
+		checkOut.setTranFruit(null);
+		System.out.println("Total :£" + checkOut.CalTotal());
+		System.out.println( "--------------------------------------------------------------------------");
+	}
 }
