@@ -6,10 +6,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.robin.Offer.Offer;
+
 public class Checkout {
 	Map<String,Fruit> StockFruit = null;// Acts as Fruit Master
 	List<String> tranFruit= null;//used to hold the Transaction details 
 	List<TranList> tList = null; // used to calculate hold item and item count
+	Map<String,Offer> offer =null; // use to hold existing offer
 	
 	public void setStockFruit(Map<String, Fruit> stockFruit) {
 		StockFruit = stockFruit;
@@ -19,6 +22,10 @@ public class Checkout {
 	}
 	public void settList(List<TranList> tList) {
 		this.tList = tList;
+	}
+	public void setOffer(Map<String,Offer> offer)
+	{
+		this.offer=offer;
 	}
 	
 	/**
@@ -44,6 +51,12 @@ public class Checkout {
 			tempFruit = StockFruit.get(tempTran.gettItem());
 			cnt=tempTran.gettQty();
 			System.out.println(tempFruit.getDesc()+" qty:"+ cnt);
+			if(offer != null)
+			{
+				Offer tempOffer =offer.get(tempTran.gettItem());
+				if(tempOffer != null)
+				{cnt=tempOffer.doCheckOut(cnt);}
+			}
 			if(cnt>0)
 			{
 				System.out.println(cnt+" * "+tempFruit.getPrice()+ "="+ format.format((double)cnt*tempFruit.getPrice()));
