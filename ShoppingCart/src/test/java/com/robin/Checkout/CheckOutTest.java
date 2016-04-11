@@ -44,34 +44,43 @@ public class CheckOutTest {
 	@Test
 	public void test1()
     {
+			double result=0;
 			System.out.println( "Test without Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString()); //Print Fruit transaction list
-    		System.out.println("Total :£" + checkOut.CalTotal()); //print the total value of the transaction list.
+    		result=checkOut.CalTotal();
+    		assertEquals(3.15d,result,0.01);
+    		System.out.println("Total :£" + result); //print the total value of the transaction list.
     		System.out.println( "--------------------------------------------------------------------------");
     }
 	
 	@Test
 	public void test2()
     {
+			double result=0;
 			System.out.println( "Test with BuyOneGetOneFree Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString());
     		offer.put("Apple",new BuyOneGetOneFree());
     		checkOut.setOffer(offer);
-    		System.out.println("Total :£" + checkOut.CalTotal());
+    		result=checkOut.CalTotal();
+    		assertEquals(1.95d,result,0.01);
+    		System.out.println("Total :£" + result);
     		System.out.println( "--------------------------------------------------------------------------");
     }
 	
 	@Test
 	public void test3()
     {
+			double result =0;
 			System.out.println( "Test with ThreeForPriceOfTwo Offer");
     		System.out.println( "--------------------------------------------------------------------------");
     		System.out.println("Transaction list:"+fruitTran.toString());
     		offer.put("Orange",new ThreeForPriceOfTwo());
     		checkOut.setOffer(offer);
-    		System.out.println("Total :£" + checkOut.CalTotal());
+    		result=checkOut.CalTotal();
+    		assertEquals(2.9d,result,0.01);
+    		System.out.println("Total :£" + result );
     		System.out.println( "--------------------------------------------------------------------------");
     }
 	
